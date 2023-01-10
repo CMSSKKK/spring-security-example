@@ -5,5 +5,5 @@ import kr.ron2.security.member.application.dto.SignUpResponse;
 
 public interface MemberService {
 
-    SignUpResponse signUp(SignUpRequest signUpRequest);
+
 }

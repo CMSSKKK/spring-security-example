@@ -17,11 +17,6 @@ public class MemberController {
     private final MemberService memberService;
 
 
-    @PostMapping
-    public SignUpResponse signUp(@RequestBody SignUpRequest signUpRequest) {
-
-        return memberService.signUp(signUpRequest);
-    }
 
 
 }

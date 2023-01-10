@@ -14,11 +14,4 @@ public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
 
 
-    @Override
-    public SignUpResponse signUp(SignUpRequest signUpRequest) {
-        Member member = Member.of(signUpRequest.getEmail(), signUpRequest.getPassword());
-
-        return new SignUpResponse(memberRepository.save(member));
-    }
-
 }

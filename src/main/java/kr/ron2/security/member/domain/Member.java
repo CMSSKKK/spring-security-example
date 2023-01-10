@@ -20,11 +20,21 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String oauthId;
+    private String name;
     private String email;
-    private String password;
+    private String profileImage;
 
-    public static Member of(String email, String password) {
-        return new Member(null, email, password);
+    public static Member of(String oauthId, String name, String email, String profileImage) {
+        return new Member(null, oauthId, name, email, profileImage);
+    }
+
+    public Member update(String name, String email, String profileImage) {
+        this.name = name;
+        this.email = email;
+        this.profileImage = profileImage;
+
+        return this;
     }
     @Override
     public boolean equals(Object o) {
