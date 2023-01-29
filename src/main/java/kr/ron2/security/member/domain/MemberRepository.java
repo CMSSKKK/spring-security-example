@@ -7,4 +7,6 @@ public interface MemberRepository {
     Member save(Member member);
 
     Optional<Member> findByOauthId(String oauthId);
+
+    Optional<Member> findById(Long id);
 }

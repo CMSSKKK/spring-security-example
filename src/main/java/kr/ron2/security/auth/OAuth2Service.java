@@ -27,24 +27,24 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
         OAuth2User oAuth2User = defaultOAuth2UserService.loadUser(userRequest);
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
-        String nameAttributeKey = userRequest.getClientRegistration()
-                .getProviderDetails()
-                .getUserInfoEndpoint()
-                .getUserNameAttributeName();
+//        String nameAttributeKey = userRequest.getClientRegistration()
+//                .getProviderDetails()
+//                .getUserInfoEndpoint()
+//                .getUserNameAttributeName();
         Map<String, Object> attributes = oAuth2User.getAttributes();
         UserInfo userInfo = OAuth2Attribute.toUserInfo(registrationId, attributes);
 
         Member member = saveOrUpdate(userInfo);
 
-        return new DefaultOAuth2User(null, attributes, nameAttributeKey);
+        return new LoginMember(member.getId(), member.getName(), member.getEmail(), member.getProfileImage(), oAuth2User);
     }
 
     private Member saveOrUpdate(UserInfo userInfo) {
         Member member = memberRepository.findByOauthId(userInfo.getOauthId())
                 .map(mem -> mem.update(userInfo.getName(), userInfo.getEmail(), userInfo.getProfileImage()))
-                .orElseGet(userInfo::toMember);
+                .orElseGet(() -> memberRepository.save(userInfo.toMember()));
 
-        return memberRepository.save(member);
+        return member;
     }
 
 }

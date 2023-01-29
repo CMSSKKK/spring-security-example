@@ -3,6 +3,7 @@ package kr.ron2.security.auth;
 import kr.ron2.security.member.domain.Member;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 @RequiredArgsConstructor
 @Getter
